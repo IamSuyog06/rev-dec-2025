@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10</title>
+</head>
+<body>
+      <h2>see console</h2>
+    <script>
+           //10
+        function counter() {
+            let count = 0;
+
+            return function () {
+                count++;
+                return count;
+            };
+        }
+
+        const increment = counter();
+        console.log(increment());
+    </script>
+</body>
+</html>

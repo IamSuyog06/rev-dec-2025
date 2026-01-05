@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>You are loading ads after page load using setTimeout.
+ Why does the ad load after the main content even if the timeout is 0ms?</h3>
+<hr>
+
+<h3>Solution: </h3>
+
+<p>Even when `setTimeout` is set to `0ms`, the callback does not execute immediately because JavaScript follows the event loop mechanism. The main content of the page is loaded and executed first as part of the call stack, and only after the call stack becomes empty does the event loop take the callback from the task queue and execute it. This ensures that critical rendering and synchronous code run first, allowing the main content to appear before non-essential tasks like loading ads.
+</p>
+</body>
+</html>

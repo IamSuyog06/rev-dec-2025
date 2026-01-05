@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="run()">Click</button>
+
+    <h2>see console for output</h2>
+
+    <p>When the button is clicked, the function is pushed onto the Call Stack and starts executing. First, the statement that prints “Start” runs immediately because it is synchronous. Next, setTimeout is encountered; its callback is sent to the Web APIs and, after the timer completes, the callback is placed into the Callback Queue, but it does not execute yet. The function then continues and prints “End”, after which the call stack becomes empty. The Event Loop constantly checks whether the call stack is empty, and once it is, it takes the callback from the callback queue and pushes it onto the call stack. Finally, the callback executes and prints “Async Task”. This is why the execution order is Start → End → Async Task, even when the timeout is set to 0ms.</p>
+<script>
+    function run() {
+        console.log("Start");
+
+        setTimeout(() => {
+            console.log("Async Task");
+        }, 0);
+
+        console.log("End");
+    }
+</script>
+
+</body>
+</html>

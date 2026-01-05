@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13</title>
+</head>
+<body>
+      <h2>see console</h2>
+    <script>
+        
+        const url = "https://jsonplaceholder.typicode.com/posts/1";
+        //13
+        async function fetchData() {
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data);
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>

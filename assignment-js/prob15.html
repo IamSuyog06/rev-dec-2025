@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15</title>
+</head>
+<body>
+
+    
+<form id="myForm">
+  <input type="text" id="username">
+  <button type="submit">Submit</button>
+  <p id="error" style="color:red;"></p>
+</form>
+
+    <script>
+           //15
+
+             // minimum required references
+        const form = document.getElementById("myForm");
+        const input = document.getElementById("username");
+        const error = document.getElementById("error");
+        
+        form.addEventListener("submit", function (e) {
+             e.preventDefault();
+            if (input.value === "") {
+                error.textContent = "Input is required";
+            }
+        });
+    </script>
+</body>
+</html>
