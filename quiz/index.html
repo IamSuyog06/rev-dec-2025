@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Quiz</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+
+<div class="quiz-box">
+
+    <h2>Mini Quiz</h2>
+
+    <div class="timer">
+        Time Left: <span id="time">60</span>s
+    </div>
+
+    <div class="progress" id="progress">
+        Question 1 of 5
+    </div>
+
+    <div class="question" id="q1">
+        <p>1. JavaScript is a ___ language.</p>
+        <label><input type="radio" name="q1" value="0"> Markup</label>
+        <label><input type="radio" name="q1" value="1"> Programming</label>
+        <label><input type="radio" name="q1" value="0"> Styling</label>
+        <button class="next" data-next="q2">Next</button>
+    </div>
+
+    
+    <div class="question" id="q2">
+        <p>2. Which tag is used for JavaScript?</p>
+        <label><input type="radio" name="q2" value="0"> &lt;js&gt;</label>
+        <label><input type="radio" name="q2" value="1"> &lt;script&gt;</label>
+        <label><input type="radio" name="q2" value="0"> &lt;javascript&gt;</label>
+        <button class="next" data-next="q3">Next</button>
+    </div>
+
+    <div class="question" id="q3">
+        <p>3. Symbol used for comments?</p>
+        <label><input type="radio" name="q3" value="1"> //</label>
+        <label><input type="radio" name="q3" value="0"> ##</label>
+        <label><input type="radio" name="q3" value="0"> **</label>
+        <button class="next" data-next="q4">Next</button>
+    </div>
+
+   
+    <div class="question" id="q4">
+        <p>4. Which prints output?</p>
+        <label><input type="radio" name="q4" value="1"> console.log()</label>
+        <label><input type="radio" name="q4" value="0"> print()</label>
+        <label><input type="radio" name="q4" value="0"> echo()</label>
+        <button class="next" data-next="q5">Next</button>
+    </div>
+
+    
+    <div class="question" id="q5">
+        <p>5. JavaScript was created by?</p>
+        <label><input type="radio" name="q5" value="1"> Netscape</label>
+        <label><input type="radio" name="q5" value="0"> Google</label>
+        <label><input type="radio" name="q5" value="0"> Microsoft</label>
+        <button id="submit">Submit</button>
+    </div>
+
+    <div class="result" id="result"></div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+    let score = 0;
+    let totalTime = 60;
+    let timeLeft = totalTime;
+    let currentQuestion = 1;
+
+    // Show first question
+    $("#q1").show();
+
+    // Timer
+    let timer = setInterval(function(){
+        timeLeft--;
+        $("#time").text(timeLeft);
+
+        if(timeLeft === 0){
+            clearInterval(timer);
+            calculateScore();
+        }
+    },1000);
+
+    // Next button 
+  $(".next").click(function(){
+
+    // Correct check
+    if($(this).parent().find("input:radio:checked").length === 0){
+        alert("Please select an option");
+        return;
+    }
+
+    let current = $(this).parent();
+    let nextId = $(this).data("next");
+
+    current.hide();
+    $("#" + nextId).show();
+
+    currentQuestion++;
+    $("#progress").text("Question " + currentQuestion + " of 5");
+});
+
+
+    // Submit
+    $("#submit").click(function(){
+        calculateScore();
+    });
+
+    function calculateScore(){
+        clearInterval(timer);
+
+        score = 0;
+
+        score += Number($("input[name='q1']:checked").val() || 0);
+        score += Number($("input[name='q2']:checked").val() || 0);
+        score += Number($("input[name='q3']:checked").val() || 0);
+        score += Number($("input[name='q4']:checked").val() || 0);
+        score += Number($("input[name='q5']:checked").val() || 0);
+
+        let timeTaken = totalTime - timeLeft;
+
+        $(".question").hide();
+        $("#progress").hide();
+        $(".timer").hide();
+
+        $("#result").html(
+            "Quiz Completed<br>" +
+            "Score: " + score + " / 5<br>" +
+            "Time Taken: " + timeTaken + " seconds"
+        );
+    }
+
+});
+</script>
+
+</body>
+</html>
